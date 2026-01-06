@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Search, Filter, FileText, Plus, MoreVertical } from 'lucide-react-native';
 import { Colors } from '../theme/colors';
+import LayoutWrapper from '../components/LayoutWrapper';
 
 const { width } = Dimensions.get('window');
 const CARD_WIDTH = (width - 44) / 2;
@@ -51,111 +52,129 @@ const DocumentsPage = ({ navigation }: any) => {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: Colors.background }]}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={styles.backText}>← Back</Text>
-        </TouchableOpacity>
-      </View>
-      {/* Header */}
-      <View style={[styles.header, { backgroundColor: Colors.cardBackground, borderBottomColor: Colors.inputBorder }]}>
-        <View style={styles.headerTop}>
-          <Text style={[styles.title, { color: Colors.textPrimary }]}>Documents</Text>
-          <TouchableOpacity style={[styles.addButton, { backgroundColor: Colors.buttonPrimary }]}>
-            <Plus size={18} color="#FFF" />
-            <Text style={styles.addButtonText}>Add</Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={[styles.subtitle, { color: Colors.textSecondary }]}>
-          Manage all ground truth documents
-        </Text>
-      </View>
-
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        {/* Search and Filter */}
-        <View style={styles.searchRow}>
-          <View style={[styles.searchContainer, { backgroundColor: Colors.cardBackground, borderColor: Colors.inputBorder }]}>
-            <Search size={18} color={Colors.textSecondary} />
-            <TextInput
-              style={styles.input}
-              placeholder="Search documents..."
-              value={searchQuery}
-              onChangeText={setSearchQuery}
-              placeholderTextColor={Colors.textSecondary}
-            />
+    <LayoutWrapper navigation={navigation} showHeader={true} showFooter={true}>
+      {/* <View style={[styles.container, { backgroundColor: Colors.background }]}> */}
+        {/* Header */}
+        <View style={styles.header}>
+          <View style={styles.leftHeader}>
+            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+              <Text style={styles.backText}>←</Text>
+            </TouchableOpacity>
+            <Text style={styles.welcome}>Documents</Text>
           </View>
-          <TouchableOpacity style={[styles.filterButton, { backgroundColor: Colors.cardBackground, borderColor: Colors.inputBorder }]}>
-            <Filter size={18} color={Colors.textPrimary} />
-            <Text style={[styles.filterText, { color: Colors.textPrimary }]}>Filters</Text>
-          </TouchableOpacity>
+
+          {/* Hamburger is handled by Layout wrapper */}
+          <View style={styles.hamburgerPlaceholder} />
         </View>
 
-        {/* Stats Cards (Grid Implementation) */}
-        <View style={styles.statsGrid}>
-          {stats.map((stat, index) => (
-            <View key={index} style={[styles.statCard, { backgroundColor: Colors.cardBackground, borderColor: Colors.inputBorder }]}>
-              <Text style={[styles.statCount, { color: stat.color }]}>{stat.count}</Text>
-              <Text style={[styles.statLabel, { color: Colors.textSecondary }]}>{stat.label}</Text>
+        <ScrollView contentContainerStyle={styles.scrollContent}>
+          {/* Search and Filter */}
+          <View style={styles.searchRow}>
+            <View style={[styles.searchContainer, { backgroundColor: Colors.cardBackground, borderColor: Colors.inputBorder }]}>
+              <Search size={18} color={Colors.textSecondary} />
+              <TextInput
+                style={styles.input}
+                placeholder="Search documents..."
+                value={searchQuery}
+                onChangeText={setSearchQuery}
+                placeholderTextColor={Colors.textSecondary}
+              />
             </View>
-          ))}
-        </View>
+            <TouchableOpacity style={[styles.filterButton, { backgroundColor: Colors.cardBackground, borderColor: Colors.inputBorder }]}>
+              <Filter size={18} color={Colors.textPrimary} />
+              <Text style={[styles.filterText, { color: Colors.textPrimary }]}>Filters</Text>
+            </TouchableOpacity>
+          </View>
 
-        {/* Documents List */}
-        <View style={styles.listContainer}>
-          {documents.map((doc) => (
-            <View key={doc.id} style={[styles.docCard, { backgroundColor: Colors.cardBackground, borderColor: Colors.inputBorder }]}>
-              <View style={styles.docRow}>
-                <View style={[styles.iconContainer, { backgroundColor: Colors.background }]}>
-                  <FileText size={20} color={getTypeColor(doc.type)} />
-                </View>
-
-                <View style={styles.docInfo}>
-                  <Text style={[styles.docName, { color: Colors.textPrimary }]} numberOfLines={2}>
-                    {doc.name}
-                  </Text>
-
-                  <View style={styles.metaRow}>
-                    <Text style={styles.metaText}>{doc.project}  •  </Text>
-                    <Text style={[styles.metaText, { color: getTypeColor(doc.type), fontWeight: '600' }]}>{doc.type}  •  </Text>
-                    <Text style={styles.metaText}>{doc.updated}</Text>
-                  </View>
-
-                  <View style={styles.statusRow}>
-                    <View style={[styles.statusBadge, { backgroundColor: `${getStatusColor(doc.status)}15` }]}>
-                      <Text style={[styles.statusText, { color: getStatusColor(doc.status) }]}>{doc.status}</Text>
-                    </View>
-                    <Text style={[styles.uploaderText, { color: Colors.textSecondary }]}>by {doc.uploader}</Text>
-                  </View>
-                </View>
-
-                <TouchableOpacity>
-                  <MoreVertical size={20} color={Colors.textSecondary} />
-                </TouchableOpacity>
+          {/* Stats Cards (Grid Implementation) */}
+          <View style={styles.statsGrid}>
+            {stats.map((stat, index) => (
+              <View key={index} style={[styles.statCard, { backgroundColor: Colors.cardBackground, borderColor: Colors.inputBorder }]}>
+                <Text style={[styles.statCount, { color: stat.color }]}>{stat.count}</Text>
+                <Text style={[styles.statLabel, { color: Colors.textSecondary }]}>{stat.label}</Text>
               </View>
-            </View>
-          ))}
-        </View>
-      </ScrollView>
-    </View>
+            ))}
+          </View>
+
+          {/* Documents List */}
+          <View style={styles.listContainer}>
+            {documents.map((doc) => (
+              <View key={doc.id} style={[styles.docCard, { backgroundColor: Colors.cardBackground, borderColor: Colors.inputBorder }]}>
+                <View style={styles.docRow}>
+                  <View style={[styles.iconContainer, { backgroundColor: Colors.background }]}>
+                    <FileText size={20} color={getTypeColor(doc.type)} />
+                  </View>
+
+                  <View style={styles.docInfo}>
+                    <Text style={[styles.docName, { color: Colors.textPrimary }]} numberOfLines={2}>
+                      {doc.name}
+                    </Text>
+
+                    <View style={styles.metaRow}>
+                      <Text style={styles.metaText}>{doc.project}  •  </Text>
+                      <Text style={[styles.metaText, { color: getTypeColor(doc.type), fontWeight: '600' }]}>{doc.type}  •  </Text>
+                      <Text style={styles.metaText}>{doc.updated}</Text>
+                    </View>
+
+                    <View style={styles.statusRow}>
+                      <View style={[styles.statusBadge, { backgroundColor: `${getStatusColor(doc.status)}15` }]}>
+                        <Text style={[styles.statusText, { color: getStatusColor(doc.status) }]}>{doc.status}</Text>
+                      </View>
+                      <Text style={[styles.uploaderText, { color: Colors.textSecondary }]}>by {doc.uploader}</Text>
+                    </View>
+                  </View>
+
+                  <TouchableOpacity>
+                    <MoreVertical size={20} color={Colors.textSecondary} />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            ))}
+          </View>
+        </ScrollView>
+      {/* </View> */}
+    </LayoutWrapper>
   );
 };
 
 const styles = StyleSheet.create({
-  header: {
-    paddingHorizontal: 24,
-    paddingTop: 16,
-  },
-  backButton: {
-    paddingVertical: 8,
-  },
-  backText: {
-    fontSize: 15,
-    color: Colors.textPrimary,
-    fontWeight: '500',
-  },
-  container: {
-    flex: 1,
-  },
+  container: { flex: 1 },
+    header: {
+        flexDirection: 'row',         // Align title and hamburger horizontally
+        alignItems: 'center',         // Center items vertically
+        justifyContent: 'space-between', 
+        paddingHorizontal: 24,
+        paddingTop: 20,               // Adjusted for better status bar clearance
+        paddingBottom: 8,
+    },
+    leftHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',         // Align arrow and "Projects" text
+    },
+    backButton: {
+        marginRight: 8,               // Space between arrow and title
+    },
+    backText: {
+        fontSize: 24,                 // Increased size to match title scale
+        color: Colors.textPrimary,
+        fontWeight: '400',
+    },
+    welcome: {
+        fontSize: 24,
+        fontWeight: '700',
+        color: Colors.textPrimary,
+        letterSpacing: -0.5,
+    },
+    hamburgerPlaceholder: {
+        width: 40,
+        height: 40,
+        // The actual icon is handled by LayoutWrapper, 
+        // this keeps the space balanced.
+    },
+    listContainer: { 
+        padding: 16, 
+        gap: 16 
+    },
 
   scrollContent: {
     padding: 16,
@@ -253,11 +272,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '500',
   },
-
-  listContainer: {
-    gap: 12,
-  },
-
   docCard: {
     padding: 16,
     borderRadius: 12,
