@@ -5,6 +5,8 @@ import HomeScreen from '../screens/HomeScreens';
 import TasksScreen from '../screens/TasksScreen';
 import MoreScreen from '../screens/MoreScreen';     
 import CreateScreen from '../screens/CreateScreen';
+import DocumentsPage from '../screens/Documents';
+import ProjectsPage from '../screens/Projects';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +23,8 @@ const AuthNavigator = () => {
             <Stack.Screen name="Tasks" component={TasksScreen} />
             <Stack.Screen name="More" component={MoreScreen} />
             <Stack.Screen name="Create" component={CreateScreen} />
+            <Stack.Screen name="Documents" component={DocumentsPage} />
+            <Stack.Screen name="Projects" component={ProjectsPage} />
         </Stack.Navigator>
     );
 };
