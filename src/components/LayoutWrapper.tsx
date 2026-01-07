@@ -74,7 +74,7 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({
         <View style={styles.footer}>
           <TouchableOpacity 
             style={styles.footerButton}
-            onPress={() => handleFooterAction('createTask')}
+            onPress={() => handleFooterAction('Create')}
           >
             <PlusSquare size={18} color={Colors.textPrimary} strokeWidth={2.5} />
             <Text style={styles.footerText}>Task</Text>

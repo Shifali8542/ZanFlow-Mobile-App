@@ -1,9 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Colors } from '../theme/colors';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { styles } from '../styles/CreateScreen.styles';
+import LayoutWrapper from '../components/LayoutWrapper';
 
-const CreateScreen = () => {
+const CreateScreen = ({ navigation }: any) => {
   return (
+    <LayoutWrapper navigation={navigation} showHeader={true} showFooter={true}>
     <View style={styles.container}>
       <Text style={styles.title}>Create</Text>
 
@@ -22,37 +24,9 @@ const CreateScreen = () => {
         <Text style={styles.cardSub}>Add files to projects</Text>
       </TouchableOpacity>
     </View>
+    </LayoutWrapper>
   );
 };
 
 export default CreateScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.background,
-    padding: 16,
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: Colors.textPrimary,
-    marginBottom: 20,
-  },
-  card: {
-    backgroundColor: Colors.cardBackground,
-    padding: 18,
-    borderRadius: 14,
-    marginBottom: 14,
-  },
-  cardTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: Colors.textPrimary,
-  },
-  cardSub: {
-    marginTop: 6,
-    fontSize: 14,
-    color: Colors.textSecondary,
-  },
-});
