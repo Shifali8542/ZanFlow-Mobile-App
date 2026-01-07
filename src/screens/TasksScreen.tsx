@@ -1,30 +1,29 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Colors } from '../theme/colors';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { styles } from '../styles/TaskScreen.styles';
+import LayoutWrapper from '../components/LayoutWrapper';
 
-const TasksScreen = () => {
+const TasksScreen = ({ navigation }: any) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>My Tasks</Text>
-      <Text style={styles.sub}>8 tasks pending</Text>
-    </View>
+    <LayoutWrapper navigation={navigation} showHeader={true} showFooter={true}>
+      <View style={styles.header}>
+        <View style={styles.leftHeader}>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+            <Text style={styles.backText}>←</Text>
+          </TouchableOpacity>
+          <Text style={styles.welcome}>Tasks</Text>
+        </View>
+
+        {/* Hamburger is handled by Layout wrapper */}
+        <View style={styles.hamburgerPlaceholder} />
+      </View>
+      <View style={styles.container}>
+        <Text style={styles.sub}>8 tasks pending</Text>
+      </View>
+    </LayoutWrapper>
   );
 };
 
 export default TasksScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.background,
-    padding: 16,
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: '700',
-  },
-  sub: {
-    color: Colors.textSecondary,
-    marginTop: 4,
-  },
-});
+
