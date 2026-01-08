@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { styles } from './Layout.style';
+// Import your fixed menu component
+import HamburgerMenuV1 from '../screens/HamburgerMenu'; 
 
 interface LayoutWrapperProps {
   children: React.ReactNode;
   navigation: any;
   showHeader?: boolean;
-  showFooter?: boolean; // Restored prop
+  showFooter?: boolean;
 }
 
 const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ 
   children, 
   navigation,
   showHeader = true,
-  showFooter = true, // Restored logic
+  showFooter = true,
 }) => {
+  // 1. Add state to control the menu
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleFooterAction = (action: string) => {
     switch (action) {
@@ -32,10 +36,17 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({
 
   return (
     <View style={styles.container}>
+      {/* 2. Pass state to the Menu component */}
+      <HamburgerMenuV1 
+        isOpen={isMenuOpen} 
+        onClose={() => setIsMenuOpen(false)} 
+      />
+
       {showHeader && (
         <TouchableOpacity 
           style={styles.floatingHamburger}
-          onPress={() => navigation.navigate('More')}
+          // 3. Change navigation.navigate to toggle the state
+          onPress={() => setIsMenuOpen(true)}
         >
           <View style={styles.hamburgerLine} />
           <View style={styles.hamburgerLine} />
@@ -47,7 +58,6 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({
         {children}
       </View>
 
-      {/* RESTORED FOOTER SECTION */}
       {showFooter && (
         <View style={styles.footer}>
           <TouchableOpacity 
