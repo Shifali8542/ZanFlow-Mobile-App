@@ -11,7 +11,7 @@ const HomeScreen = ({ navigation }: any) => {
             <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
               <Text style={styles.backText}>←</Text>
             </TouchableOpacity>
-            <Text style={styles.welcome}>Hi, Harshit 👋</Text>
+            <Text style={styles.welcome}>Hi, ShifMeg 👋</Text>
           </View>
           
           {/* Hamburger is handled by Layout wrapper */}
@@ -45,7 +45,7 @@ const HomeScreen = ({ navigation }: any) => {
           <DashboardCard
             title="My Tasks"
             value="8 pending tasks"
-            onPress={() => navigation.navigate('Tasks')}
+            onPress={() => navigation.navigate('PendingTasks')}
           />
 
           <DashboardCard
