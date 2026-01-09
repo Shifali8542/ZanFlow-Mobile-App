@@ -10,13 +10,6 @@ const AllTasks = ({ navigation }: any) => {
     { id: 3, title: 'Design Homepage', status: 'Completed', priority: 'Medium' },
     { id: 4, title: 'Payment Gateway', status: 'Deployed', priority: 'High' },
     { id: 5, title: 'Code Review', status: 'Pending', priority: 'Medium' },
-    { id: 6, title: 'Implement Dark Mode', status: 'Backlog', priority: 'Low' },
-    { id: 7, title: 'Testing Module', status: 'Pending', priority: 'High' },
-    { id: 8, title: 'Mobile App Features', status: 'In Progress', priority: 'High' },
-    { id: 9, title: 'API Integration', status: 'Completed', priority: 'High' },
-    { id: 10, title: 'Analytics Dashboard', status: 'Deferred', priority: 'Low' },
-    { id: 11, title: 'Notification System', status: 'Deployed', priority: 'Medium' },
-    { id: 12, title: 'Add Export Functionality', status: 'Backlog', priority: 'Medium' },
   ];
 
   const getStatusColor = (status: string) => {

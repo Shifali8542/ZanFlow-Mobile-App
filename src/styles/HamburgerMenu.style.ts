@@ -123,6 +123,10 @@ export const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 16,
   } as ViewStyle,
+  nestedList: {
+    flex: 1,
+    paddingLeft: 8,
+  } as ViewStyle,
   nestedRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -159,5 +163,28 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 12,
     paddingHorizontal: 20,
+  } as ViewStyle,
+  footerContainer: {
+    marginTop: 'auto', // Pushes the footer to the bottom
+    borderTopWidth: 1,
+    borderTopColor: '#f1f5f9',
+    paddingVertical: 12,
+    paddingBottom: Platform.OS === 'ios' ? 30 : 16, 
+  } as ViewStyle,
+  footerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    marginHorizontal: 12,
+    borderRadius: 10,
+  } as ViewStyle,
+  footerIconContainer: {
+    width: 32,
+    height: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#f8fafc',
+    borderRadius: 8,
   } as ViewStyle,
 });
