@@ -25,8 +25,7 @@ const DocumentsPage = ({ navigation }: any) => {
   const documents = [
     { id: 1, name: 'ZanFlow_Product_Documentation.pdf', project: 'Project 27', type: 'pdf', status: 'draft', updated: '1h ago', uploader: 'harshit' },
     { id: 2, name: 'AI-powered task creation for Zanflow project management.pdf', project: 'Project 27', type: 'pdf', status: 'draft', updated: '1h ago', uploader: 'harshit' },
-    { id: 3, name: 'MockFlow - Project Plan Draft (1).pdf', project: 'Project 26', type: 'pdf', status: 'draft', updated: '5d ago', uploader: 'harshit' },
-    { id: 4, name: 'document.pdf', project: 'Project 22', type: 'pdf', status: 'draft', updated: '6d ago', uploader: 'harshit' },
+    { id: 3, name: 'MockFlow - Project Plan Draft (1).pdf', project: 'Project 26', type: 'pdf', status: 'draft', updated: '5d ago', uploader: 'harshit' }
   ];
 
   const getTypeColor = (type: string) => {

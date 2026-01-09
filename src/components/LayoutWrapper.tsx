@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { styles } from './Layout.style';
-// Import your fixed menu component
 import HamburgerMenuV1 from '../screens/HamburgerMenu'; 
+import { PlusSquare, Upload, FileText } from 'lucide-react-native';
+import { Colors } from '../theme/colors';
 
 interface LayoutWrapperProps {
   children: React.ReactNode;
@@ -26,7 +27,6 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({
         navigation.navigate('Create');
         break;
       case 'upload':
-        // Handle upload logic
         break;
       case 'documents':
         navigation.navigate('Documents');
@@ -40,12 +40,12 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({
       <HamburgerMenuV1 
         isOpen={isMenuOpen} 
         onClose={() => setIsMenuOpen(false)} 
+        navigation={navigation}
       />
 
       {showHeader && (
         <TouchableOpacity 
           style={styles.floatingHamburger}
-          // 3. Change navigation.navigate to toggle the state
           onPress={() => setIsMenuOpen(true)}
         >
           <View style={styles.hamburgerLine} />
@@ -64,6 +64,7 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({
             style={styles.footerButton}
             onPress={() => handleFooterAction('createTask')}
           >
+            <PlusSquare size={20} color={Colors.textPrimary} style={styles.footerIcon} />
             <Text style={styles.footerButtonText}>Create Task</Text>
           </TouchableOpacity>
           
@@ -73,6 +74,7 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({
             style={styles.footerButton}
             onPress={() => handleFooterAction('upload')}
           >
+            <Upload size={20} color={Colors.textPrimary} style={styles.footerIcon} />
             <Text style={styles.footerButtonText}>Upload</Text>
           </TouchableOpacity>
           
@@ -82,6 +84,7 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({
             style={styles.footerButton}
             onPress={() => handleFooterAction('documents')}
           >
+            <FileText size={20} color={Colors.textPrimary} style={styles.footerIcon} />
             <Text style={styles.footerButtonText}>Docs</Text>
           </TouchableOpacity>
         </View>

@@ -54,6 +54,9 @@ export const styles = StyleSheet.create({
     fontWeight: '600',
     color: Colors.textPrimary,
   },
+  footerIcon: {
+    marginBottom: 4,
+  },
   footerDivider: {
     width: 1,
     backgroundColor: Colors.textSecondary,

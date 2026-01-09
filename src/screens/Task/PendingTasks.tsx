@@ -9,10 +9,6 @@ const PendingTasks = ({ navigation }: any) => {
     { id: 2, title: 'Code Review', priority: 'Medium', dueDate: '2024-01-12' },
     { id: 3, title: 'Testing Module', priority: 'High', dueDate: '2024-01-09' },
     { id: 4, title: 'Update Dependencies', priority: 'Low', dueDate: '2024-01-15' },
-    { id: 5, title: 'Bug Fixes', priority: 'High', dueDate: '2024-01-08' },
-    { id: 6, title: 'Performance Optimization', priority: 'Medium', dueDate: '2024-01-11' },
-    { id: 7, title: 'UI Improvements', priority: 'Low', dueDate: '2024-01-14' },
-    { id: 8, title: 'Security Audit', priority: 'High', dueDate: '2024-01-09' },
   ];
 
   const getPriorityColor = (priority: string) => {

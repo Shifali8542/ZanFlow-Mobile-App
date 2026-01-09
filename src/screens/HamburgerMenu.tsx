@@ -23,13 +23,15 @@ import {
   ChevronUp,
   Columns2,
   X,
-  LucideIcon
+  LucideIcon,
+  User
 } from 'lucide-react-native';
 import { styles, DRAWER_WIDTH } from '../styles/HamburgerMenu.style';
 
 interface HamburgerMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  navigation: any;
 }
 
 interface MenuLinkProps {
@@ -42,11 +44,17 @@ interface NestedLinkProps {
   icon: LucideIcon;
   label: string;
   isActive?: boolean;
+  onPress?: () => void;
 }
 
-const HamburgerMenuV1: React.FC<HamburgerMenuProps> = ({ isOpen, onClose }) => {
-  const [tasksExpanded, setTasksExpanded] = useState(true);
+const HamburgerMenuV1: React.FC<HamburgerMenuProps> = ({ isOpen, onClose, navigation }) => {
+  const [tasksExpanded, setTasksExpanded] = useState(false);
   const [shouldRender, setShouldRender] = useState(isOpen);
+
+  const handleNavigation = (routeName: string) => {
+    onClose();
+    navigation.navigate(routeName);
+  };
 
   const slideAnim = useRef(new Animated.Value(-DRAWER_WIDTH)).current;
   const overlayAnim = useRef(new Animated.Value(0)).current;
@@ -100,49 +108,123 @@ const HamburgerMenuV1: React.FC<HamburgerMenuProps> = ({ isOpen, onClose }) => {
 
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContentContainer}>
           <View style={styles.section}>
-            <Text style={styles.sectionLabel}>MAIN</Text>
-            <MenuLink icon={LayoutDashboard} label="Dashboard" />
-            <MenuLink icon={FolderKanban} label="Projects" />
-          </View>
-
-          <View style={styles.section}>
-            <Text style={styles.sectionLabel}>TASKS</Text>
+            <MenuLink
+              icon={LayoutDashboard}
+              label="Dashboard"
+              onPress={() => handleNavigation('Home')}
+            />
+            <MenuLink
+              icon={FolderKanban}
+              label="Projects"
+              onPress={() => handleNavigation('Projects')}
+            />
+            {/* Clickable Accordion Header */}
             <TouchableOpacity
-              style={[styles.menuRow, styles.activeRow]}
+              style={styles.menuRow}
               onPress={() => setTasksExpanded(!tasksExpanded)}
             >
               <View style={styles.rowLead}>
                 <View style={styles.iconContainer}>
-                  <CheckSquare size={20} color="#3b82f6" />
+                  <FolderKanban size={20} color="#64748b" />
                 </View>
-                <Text style={styles.activeText}>My Tasks</Text>
+                <Text style={styles.menuText}>Tasks</Text>
               </View>
-              {tasksExpanded ? <ChevronUp size={18} color="#3b82f6" /> : <ChevronDown size={18} color="#3b82f6" />}
+              {tasksExpanded ? <ChevronUp size={18} color="#64748b" /> : <ChevronDown size={18} color="#64748b" />}
             </TouchableOpacity>
 
+            {/* Expanded Accordion Content */}
             {tasksExpanded && (
               <View style={styles.nestedContainer}>
                 <View style={styles.verticalLine} />
-                {/* FIXED: Replaced <div> with <View> */}
-                <View style={{ flex: 1 }}>
-                  <View style={styles.nestedItems}>
-                    <NestedLink icon={CheckSquare} label="All Tasks" isActive={true} />
-                    <NestedLink icon={Clock} label="Pending Tasks" />
-                    <NestedLink icon={PlayCircle} label="In Progress" />
-                    <NestedLink icon={Plus} label="Add New Task" />
-                  </View>
+                <View style={styles.nestedList}>
+                  <NestedLink
+                    icon={CheckSquare}
+                    label="All Tasks"
+                    onPress={() => handleNavigation('AllTasks')}
+                  />
+                  <NestedLink
+                    icon={CheckSquare}
+                    label="Completed Tasks"
+                    onPress={() => handleNavigation('CompletedTasks')}
+                  />
+                  <NestedLink
+                    icon={Clock}
+                    label="Pending Tasks"
+                    onPress={() => handleNavigation('PendingTasks')}
+                  />
+                  <NestedLink
+                    icon={Layers}
+                    label="Backlog Tasks"
+                    onPress={() => handleNavigation('BacklogTasks')}
+                  />
+                  <NestedLink
+                    icon={PlayCircle}
+                    label="In Progress"
+                    onPress={() => handleNavigation('InProgressTasks')}
+                  />
+                  <NestedLink
+                    icon={Send}
+                    label="Deployed Tasks"
+                    onPress={() => handleNavigation('DeployedTasks')}
+                  />
+                  <NestedLink
+                    icon={Clock}
+                    label="Deferred Tasks"
+                    onPress={() => handleNavigation('DeferredTasks')}
+                  />
+                  <NestedLink
+                    icon={Plus}
+                    label="Add Task"
+                    onPress={() => handleNavigation('AddNewTask')}
+                  />
                 </View>
               </View>
             )}
+
+            <MenuLink
+              icon={LayoutDashboard}
+              label="Documents"
+              onPress={() => handleNavigation('Documents')}
+            />
+            <MenuLink icon={FolderKanban} label="Team Management" />
           </View>
         </ScrollView>
+        <View style={styles.footerContainer}>
+          <TouchableOpacity
+            style={styles.footerRow}
+            onPress={() => handleNavigation('Profile')}
+          >
+            <View style={styles.footerIconContainer}>
+              <User size={20} color="#64748b" />
+            </View>
+            <Text style={styles.menuText}>Profile</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.footerRow}
+            onPress={() => handleNavigation('Settings')}
+          >
+            <View style={styles.footerIconContainer}>
+              <Settings size={20} color="#64748b" />
+            </View>
+            <Text style={styles.menuText}>Settings</Text>
+          </TouchableOpacity>
+        </View>
       </Animated.View>
     </View>
   );
 };
 
-const MenuLink: React.FC<MenuLinkProps> = ({ icon: Icon, label, isSelected }) => (
-  <TouchableOpacity style={[styles.menuRow, isSelected && styles.selectedRow]}>
+const MenuLink: React.FC<MenuLinkProps & { onPress?: () => void }> = ({
+  icon: Icon,
+  label,
+  isSelected,
+  onPress
+}) => (
+  <TouchableOpacity
+    style={[styles.menuRow, isSelected && styles.selectedRow]}
+    onPress={onPress}
+  >
     <View style={styles.rowLead}>
       <View style={styles.iconContainer}>
         <Icon size={20} color={isSelected ? "#3b82f6" : "#64748b"} />
@@ -152,8 +234,16 @@ const MenuLink: React.FC<MenuLinkProps> = ({ icon: Icon, label, isSelected }) =>
   </TouchableOpacity>
 );
 
-const NestedLink: React.FC<NestedLinkProps> = ({ icon: Icon, label, isActive }) => (
-  <TouchableOpacity style={[styles.nestedRow, isActive && styles.activeNestedRow]}>
+const NestedLink: React.FC<NestedLinkProps & { onPress?: () => void }> = ({
+  icon: Icon,
+  label,
+  isActive,
+  onPress
+}) => (
+  <TouchableOpacity
+    style={[styles.nestedRow, isActive && styles.activeNestedRow]}
+    onPress={onPress}
+  >
     <View style={styles.nestedIconContainer}>
       <Icon size={16} color={isActive ? "#3b82f6" : "#94a3b8"} />
     </View>
