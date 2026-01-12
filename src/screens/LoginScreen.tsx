@@ -1,10 +1,35 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, SafeAreaView, Alert } from 'react-native';
 import { styles } from '../styles/LoginScreen.styles';
+import { authApi } from '../api';
 
 const LoginScreen = ({ navigation }: any) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    if (!username || !password) {
+      Alert.alert('Validation', 'Please enter username and password');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      console.log('API CLIENT:', authApi.login);
+      const result = await authApi.login({
+        username,
+        password,
+      });
+      console.log('Login response', result);
+      navigation.navigate('Home');
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Login Failed', 'Invalid username or password');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -35,14 +60,14 @@ const LoginScreen = ({ navigation }: any) => {
           />
         </View>
 
-        <TouchableOpacity style={styles.button}
-          onPress={() => navigation.navigate('Home')}>
-          <Text style={styles.buttonText}>Sign in</Text>
+        <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={loading}>
+          <Text style={styles.buttonText}>
+            {loading ? 'Signing in...' : 'Sign in'}
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 };
-
 
 export default LoginScreen;
