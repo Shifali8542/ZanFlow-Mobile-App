@@ -16,6 +16,8 @@ import BacklogTasks from '../screens/Task/BacklogTask';
 import DeployedTasks from '../screens/Task/DeployedTask';
 import DeferredTasks from '../screens/Task/DeferredTask';
 import AddNewTask from '../screens/Task/AddNewTask';
+import TeamManagement from '../screens/TeamManagement/TeamManagement';
+import Role from '../screens/TeamManagement/Role';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +45,8 @@ const AuthNavigator = () => {
             <Stack.Screen name="DeployedTasks" component={DeployedTasks} />
             <Stack.Screen name="DeferredTasks" component={DeferredTasks} />
             <Stack.Screen name="AddNewTask" component={AddNewTask} />
+            <Stack.Screen name="TeamManagement" component={TeamManagement} />
+            <Stack.Screen name="Role" component={Role} />
         </Stack.Navigator>
     );
 };
