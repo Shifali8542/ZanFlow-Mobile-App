@@ -164,14 +164,20 @@ export const styles = StyleSheet.create({
 
   docName: {
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: '500',
     marginBottom: 6,
-    lineHeight: 20,
+    marginTop: 4,
+    // lineHeight: 20,
   },
 
   metaRow: {
     flexDirection: 'row',
     marginBottom: 8,
+  },
+
+  metaTextH: {
+    fontSize: 20,
+    fontWeight: '600',
   },
 
   metaText: {

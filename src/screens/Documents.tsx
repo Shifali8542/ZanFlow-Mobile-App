@@ -131,19 +131,20 @@ const DocumentsPage = ({ navigation }: any) => {
               <View style={styles.docRow}>
                 <View style={[styles.iconContainer, { backgroundColor: Colors.background }]}>
                   <FileText size={20} color={getTypeColor(doc.file_type)} />
+                  <Text style={[styles.metaText, { color: getTypeColor(doc.file_type) }]}>
+                    {doc.file_type} 
+                  </Text>
                 </View>
 
                 <View style={styles.docInfo}>
-                  <Text style={styles.metaText}>Project {doc.project} • </Text>
-                  <Text style={[styles.metaText, { color: getTypeColor(doc.file_type) }]}>
-                    {doc.file_type} •
-                  </Text>
+                  <Text style={styles.metaTextH}>Project: {doc.project} </Text>
+                  <Text style={styles.docName}> {doc.name} </Text>
 
-                  <View style={styles.metaRow}>
+                  {/* <View style={styles.metaRow}>
                     <Text style={styles.metaText}>
                       {new Date(doc.updated_at).toDateString()}
                     </Text>
-                  </View>
+                  </View> */}
 
                   <View style={styles.statusRow}>
                     <View style={[styles.statusBadge, { backgroundColor: `${getStatusColor(doc.status)}15` }]}>

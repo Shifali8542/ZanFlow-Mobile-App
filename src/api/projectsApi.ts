@@ -3,6 +3,8 @@ import api from './client';
 export interface ProjectMinimal {
   id: number;
   name: string;
+  task_type: string;
+  is_active: boolean;
 }
 
 export interface PaginatedProjectsResponse {

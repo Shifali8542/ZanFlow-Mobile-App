@@ -80,18 +80,22 @@ const ProjectsPage = ({ navigation }: any) => {
                                         <Text style={[styles.projectName, { color: Colors.textPrimary }]}>
                                             {project.name}
                                         </Text>
-                                        {/* Note: ProjectMinimal currently only has id/name. 
-                                            You may need to update the interface for tags/desc */}
+                                        <Text style={[styles.projectName, { color: Colors.textSecondary }]}>
+                                            {project.task_type}
+                                        </Text>
                                     </View>
                                 </View>
 
                                 <View style={styles.footer}>
                                     <View style={styles.statsRow}>
                                         <View style={styles.statItem}>
-                                            <Users size={16} color={Colors.textSecondary} />
-                                            <Text style={[styles.statText, { color: Colors.textSecondary }]}>
+                                            {/* <Users size={16} color={Colors.textSecondary} /> */}
+                                            {/* <Text style={[styles.statText, { color: Colors.textSecondary }]}>
                                                 ID: {project.id}
                                             </Text>
+                                            <Text style={[styles.statText, { color: Colors.textSecondary }]}>
+                                                {project.is_active ? 'Active' : 'Inactive'}
+                                            </Text> */}
                                         </View>
                                     </View>
                                 </View>

@@ -20,20 +20,23 @@ const HomeScreen = ({ navigation }: any) => {
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         {/* Quick Stats Bar */}
         <View style={styles.statsBar}>
-          <View style={styles.statItem}>
+          <TouchableOpacity style={styles.statItem}
+          onPress={() => navigation.navigate('PendingTasks')}>
             <Text style={styles.statValue}>8</Text>
-            <Text style={styles.statLabel}>Pending</Text>
-          </View>
+            <Text style={styles.statLabel}>Tasks</Text>
+          </TouchableOpacity>
           <View style={styles.statDivider} />
-          <View style={styles.statItem}>
+          <TouchableOpacity style={styles.statItem}
+          onPress={() => navigation.navigate('Projects')}>
             <Text style={styles.statValue}>3</Text>
-            <Text style={styles.statLabel}>Active</Text>
-          </View>
+            <Text style={styles.statLabel}>Projects</Text>
+          </TouchableOpacity>
           <View style={styles.statDivider} />
-          <View style={styles.statItem}>
+          <TouchableOpacity style={styles.statItem}
+          onPress={() => navigation.navigate('Documents')}>
             <Text style={styles.statValue}>19</Text>
-            <Text style={styles.statLabel}>Files</Text>
-          </View>
+            <Text style={styles.statLabel}>Documents</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Dashboard Cards */}
