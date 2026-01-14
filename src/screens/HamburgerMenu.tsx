@@ -186,7 +186,11 @@ const HamburgerMenuV1: React.FC<HamburgerMenuProps> = ({ isOpen, onClose, naviga
               label="Documents"
               onPress={() => handleNavigation('Documents')}
             />
-            <MenuLink icon={FolderKanban} label="Team Management" />
+            <MenuLink
+              icon={FolderKanban}
+              label="Team Management"
+              onPress={() => handleNavigation('TeamManagement')}
+            />
           </View>
         </ScrollView>
         <View style={styles.footerContainer}>
